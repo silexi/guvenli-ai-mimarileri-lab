@@ -12,11 +12,11 @@ her şey sizin Colab çalışma zamanınızda çalışır ve oturum kapanınca s
 
 | Lab | Konu | Süre |
 |-----|------|------|
-| [Lab 1](../../blob/main/lab1_guvenilir_cikti.ipynb) | Güvenilir çıktı: şema, doğrulama, onarım turu | 30 dk |
-| [Lab 2](../../blob/main/lab2_rag_getirme.ipynb) | RAG ve getirme kalitesi, yetki filtresi | 35 dk |
-| [Lab 3](../../blob/main/lab3_arac_guvenligi.ipynb) | **Araç tasarımı, prompt injection, guardrail** | 45 dk |
-| [Lab 4](../../blob/main/lab4_workflow_vs_agent.ipynb) | İş akışı mı, ajan mı? | 30 dk |
-| [Lab 5](../../blob/main/lab5_eval.ipynb) | Bozulmayı yakalayan minik test | 15 dk |
+| [Lab 1](https://colab.research.google.com/github/silexi/guvenli-ai-mimarileri-lab/blob/main/lab1_guvenilir_cikti.ipynb) | Güvenilir çıktı: şema, doğrulama, onarım turu | 30 dk |
+| [Lab 2](https://colab.research.google.com/github/silexi/guvenli-ai-mimarileri-lab/blob/main/lab2_rag_getirme.ipynb) | RAG ve getirme kalitesi, yetki filtresi | 35 dk |
+| [Lab 3](https://colab.research.google.com/github/silexi/guvenli-ai-mimarileri-lab/blob/main/lab3_arac_guvenligi.ipynb) | **Araç tasarımı, prompt injection, guardrail** | 45 dk |
+| [Lab 4](https://colab.research.google.com/github/silexi/guvenli-ai-mimarileri-lab/blob/main/lab4_workflow_vs_agent.ipynb) | İş akışı mı, ajan mı? | 30 dk |
+| [Lab 5](https://colab.research.google.com/github/silexi/guvenli-ai-mimarileri-lab/blob/main/lab5_eval.ipynb) | Bozulmayı yakalayan minik test | 15 dk |
 
 Her defterin ilk hücresinde **"Open in Colab"** rozeti vardır. Tıklayın, açılır.
 Kendi kopyanızda çalışmak için Colab'da `Dosya → Drive'a kopya kaydet` deyin.

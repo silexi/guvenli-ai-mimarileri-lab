@@ -11,6 +11,39 @@ class SemaHatasi(Exception):
     """Model ciktisi semaya uymadiginda atilir."""
 
 
+# --------------------------------------------------------------------------
+# Turkce normalizasyon
+# --------------------------------------------------------------------------
+# Model "yuksek" degil "yüksek" yazar. Buyuk/kucuk harf de degisir.
+# Tam esleme (==) ile karsilastirirsaniz gecerli her cevap BASARISIZ gorunur.
+#
+# Bu, RAG ve siniflandirma sistemlerinde en sik yasanan sessiz hatalardan
+# biridir: model dogru cevabi vermistir, sizin karsilastirmaniz yanlistir.
+# Normalizasyon da bir guardrail katmanidir.
+
+_TR_HARITA = str.maketrans(
+    "çğıöşüÇĞİıÖŞÜ",
+    "cgiosuCGIiOSU",
+)
+
+
+def normalize(deger):
+    """
+    Turkce metni karsilastirilabilir hale getirir.
+
+    'Yüksek', 'YÜKSEK', 'yuksek', ' yüksek ' -> hepsi 'yuksek'
+    Metin olmayan degerler oldugu gibi doner.
+    """
+    if not isinstance(deger, str):
+        return deger
+    return deger.translate(_TR_HARITA).lower().strip()
+
+
+def esit(a, b):
+    """Iki degeri Turkce duyarsiz karsilastirir."""
+    return normalize(a) == normalize(b)
+
+
 # Destek talebi cikarim semasi
 TALEP_SEMASI = {
     "tur": {
@@ -81,12 +114,24 @@ def dogrula(veri, sema=TALEP_SEMASI):
             )
             continue
 
-        if "izinli" in kural and deger not in kural["izinli"]:
-            hatalar.append(
-                f"'{alan}' degeri izinli listede yok: {deger!r} "
-                f"(izinli: {sorted(kural['izinli'])})"
-            )
-            continue
+        if "izinli" in kural:
+            # Turkce duyarsiz eslestirme: model "Yüksek" yazsa da kabul edilir,
+            # ama sisteme KANONIK deger ("yuksek") yazilir. Boylece asagi akista
+            # herkes ayni degeri gorur.
+            eslesen = None
+            for izinli_deger in kural["izinli"]:
+                if normalize(deger) == normalize(izinli_deger):
+                    eslesen = izinli_deger
+                    break
+
+            if eslesen is None:
+                hatalar.append(
+                    f"'{alan}' degeri izinli listede yok: {deger!r} "
+                    f"(izinli: {sorted(kural['izinli'])})"
+                )
+                continue
+
+            deger = eslesen
 
         if "bicim" in kural and not re.fullmatch(kural["bicim"], str(deger)):
             hatalar.append(

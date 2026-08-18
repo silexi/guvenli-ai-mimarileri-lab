@@ -197,6 +197,24 @@ _HAVUZLAR = {
 #           aciliyeti dusurur                       -> %60  (REGRESYON)
 
 _ICERIK_ESLEME = {
+    # Lab 1 - bolum 6: her talep FARKLI bir kayit uretmeli.
+    # (Bolum 4'teki 'lab1_sema' havuzu tek talep uzerinde donup bozuk
+    #  ciktilari gosterirken, bu senaryo cesitli girdileri dogru isler.)
+    "lab1_sema_cesitli": [
+        ("iki kez kesildi",
+         '{"tur": "fatura_itirazi", "donem": "2026-08", "tutar": 12400.00, '
+         '"birim": "TRY", "aciliyet": "yuksek", "guven": 0.81}'),
+        ("panele giris",
+         '{"tur": "teknik_sorun", "donem": "2026-08", '
+         '"aciliyet": "orta", "guven": 0.74}'),
+        ("iptal etmek",
+         '{"tur": "iptal_talebi", "donem": "2026-08", '
+         '"aciliyet": "yuksek", "guven": 0.55}'),
+        ("kampanya",
+         '{"tur": "bilgi_talebi", "donem": "2026-08", '
+         '"aciliyet": "dusuk", "guven": 0.42}'),
+    ],
+
     "lab5_v1": [
         ("iki kez kesildi", '{"kategori": "faturalama", "aciliyet": "yuksek"}'),
         ("hesabima yansimadi", '{"kategori": "odeme", "aciliyet": "orta"}'),
